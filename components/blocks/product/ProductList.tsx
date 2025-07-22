@@ -27,8 +27,9 @@ function ProductList() {
                 data={data}
                 numColumns={2}
                 keyExtractor={(item) => item.id}
+                scrollEnabled={false}
                 renderItem={({ item }) => (
-                    <ProductCard item={item} col={2} />
+                    <ProductCard key={item.id} item={item} col={2} gap={16} />
                 )}
                 showsVerticalScrollIndicator={false}
             />

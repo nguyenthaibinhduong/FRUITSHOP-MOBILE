@@ -1,4 +1,4 @@
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import ProductCard from "./product/ProductCard";
 const flashSale = [
     { id: '1', name: 'Áo thun nam', price: '99.000đ', image: require('../../assets/images/product/product-1.jpg') },
@@ -24,9 +24,9 @@ function FlashSale() {
                 data={flashSale}
                 keyExtractor={item => item.id}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 8 }}
+                contentContainerStyle={{ paddingHorizontal: 2, paddingVertical: 2 }}
                 renderItem={({ item }) => (
-                    <ProductCard item={item} col={3} />
+                    <ProductCard item={item} col={3} gap={16} />
                 )}
             />
         </View>
