@@ -1,6 +1,8 @@
 import { FlatList, Text, View } from "react-native";
 import ProductCard from "./product/ProductCard";
-const flashSale = [
+import React from "react";
+import useFetch from "@/hooks/useFetch";
+const dataSample = [
     { id: '1', name: 'Áo thun nam', price: '99.000đ', image: require('../../assets/images/product/product-1.jpg') },
     { id: '2', name: 'Tai nghe Bluetooth', price: '129.000đ', image: require('../../assets/images/product/product-2.jpg') },
     { id: '3', name: 'Giày Sneaker', price: '199.000đ', image: require('../../assets/images/product/product-3.jpg') },
@@ -15,13 +17,24 @@ const flashSale = [
     { id: '12', name: 'Dép tổ ong', price: '49.000đ', image: require('../../assets/images/product/product-12.jpg') },
 ];
 function FlashSale() {
+    const [products, setProducts] = React.useState<any>()
+    const { data, loading, error } = useFetch('/products?page=1&limit=20&with=image');
+    React.useEffect(() => {
+        if (data?.data) {
+            setProducts(data?.data)
+
+
+        }
+    }, [data])
+
+
     return (<>
         <View className="bg-primary mt-5 px-2 py-3">
             <Text className="font-bold px-3 text-white text-xl   ">⚡ Flash Sale</Text>
             <FlatList
 
                 horizontal
-                data={flashSale}
+                data={products ?? dataSample}
                 keyExtractor={item => item.id}
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{ paddingHorizontal: 2, paddingVertical: 2 }}

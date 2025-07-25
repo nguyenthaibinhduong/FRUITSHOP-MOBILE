@@ -1,7 +1,9 @@
-import ProductsScreen from "@/screens/ProductsScreen";
+import ProductsScreen from "@/views/ProductsScreen";
 
 
 function Product() {
+
+
     return (
         <ProductsScreen />
     );

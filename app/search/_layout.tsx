@@ -7,13 +7,13 @@ export default function SearchLayout() {
 
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <KeyboardAvoidingView
-                style={{ flex: 1 }}
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            >
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <Stack screenOptions={{ headerShown: false }} />
-            </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 }

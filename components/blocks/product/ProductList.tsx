@@ -1,8 +1,10 @@
 import { FlatList, Text, View } from "react-native";
 import ProductCard from "./ProductCard";
+import React from "react";
 
 
-const data: any = [
+
+const dataSample: any = [
     { id: '1', name: 'Áo thun nam', price: '99.000đ', image: require('../../../assets/images/product/product-1.jpg') },
     { id: '2', name: 'Tai nghe Bluetooth', price: '129.000đ', image: require('../../../assets/images/product/product-2.jpg') },
     { id: '3', name: 'Giày Sneaker', price: '199.000đ', image: require('../../../assets/images/product/product-3.jpg') },
@@ -17,19 +19,23 @@ const data: any = [
     { id: '12', name: 'Dép tổ ong', price: '49.000đ', image: require('../../../assets/images/product/product-12.jpg') },
 ];
 
-function ProductList() {
+function ProductList(props: any) {
+    const { products } = props;
+
+
+
     return (
 
         <View className="bg-secondary px-2 py-4 flex-1">
-            <Text className="font-bold px-3 text-primary text-xl  my-5 ">Sản phẩm mới</Text>
+            <Text className="font-bold px-3 text-primary text-xl  my-5 ">Sản phẩm</Text>
             <FlatList
                 className="w-full"
-                data={data}
+                data={products ?? dataSample}
                 numColumns={2}
                 keyExtractor={(item) => item.id}
                 scrollEnabled={false}
                 renderItem={({ item }) => (
-                    <ProductCard key={item.id} item={item} col={2} gap={16} />
+                    <ProductCard hasAddCart={true} key={item?.id} item={item} col={2} gap={16} />
                 )}
                 showsVerticalScrollIndicator={false}
             />

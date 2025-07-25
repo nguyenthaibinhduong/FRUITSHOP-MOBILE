@@ -1,4 +1,4 @@
-import SearchScreen from "@/screens/SearchScreen";
+import SearchScreen from "@/views/SearchScreen";
 
 
 function Search() {

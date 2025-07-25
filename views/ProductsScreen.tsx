@@ -2,16 +2,23 @@ import CategoryList from "@/components/blocks/CategoryList";
 import ProductList from "@/components/blocks/product/ProductList";
 import HeaderLayout from "@/components/layouts/HeaderLayout";
 import FilterModal from "@/components/modals/FilterModal";
+import useFetch from "@/hooks/useFetch";
+import { useProductList } from "@/hooks/useProductList";
+import { buildProductQuery } from "@/redux/stores/productSlice";
+import { RootState } from "@/redux/stores/store";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
+import { useSelector } from "react-redux";
 
-function ProductsScreen() {
+
+function ProductsScreen({ isFilter = false }: { isFilter?: boolean }) {
     const [isFilterVisible, setFilterVisible] = React.useState<boolean>(false);
 
     const openFilter = () => setFilterVisible(!isFilterVisible);
     const closeFilter = () => setFilterVisible(false);
+
 
     useFocusEffect(
         useCallback(() => {
@@ -20,6 +27,15 @@ function ProductsScreen() {
             };
         }, [])
     );
+
+    const [products, setProducts] = React.useState<any>()
+    const { data, loading, error } = useProductList(isFilter);
+
+    React.useEffect(() => {
+        if (data) {
+            setProducts(data);
+        }
+    }, [data, isFilter]);
 
     return (
         <>
@@ -42,7 +58,7 @@ function ProductsScreen() {
                     contentContainerStyle={{ paddingBottom: 200 }}
                 >
                     <CategoryList />
-                    <ProductList />
+                    <ProductList products={products} />
                     <FilterModal visible={isFilterVisible} onClose={closeFilter} topOffset={0} />
                 </ScrollView>
 
